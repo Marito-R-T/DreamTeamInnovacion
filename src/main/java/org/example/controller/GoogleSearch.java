@@ -1,7 +1,6 @@
-package org.example.serpapi;
+package org.example.controller;
 
 import java.util.Map;
-import com.google.gson.JsonArray;
 
 /***
  * Google Search Results using SerpApi
@@ -41,7 +40,7 @@ public class GoogleSearch extends SerpApiSearch {
   * @param parameter search parameter
   */
   public GoogleSearch(Map<String, String> parameter) {
-    super(parameter, "google");
+    super(parameter, parameter.get("engine"));
   }
 
 // end

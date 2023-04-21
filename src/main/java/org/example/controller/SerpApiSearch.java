@@ -1,4 +1,4 @@
-package org.example.serpapi;
+package org.example.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -65,8 +65,9 @@ public class SerpApiSearch extends Exception {
    * @param engine service like: google, yahoo, bing...
    */
   public SerpApiSearch(Map<String, String> parameter, String engine) {
-    this.parameter = parameter;
-    this.engine = engine;
+      System.out.println(parameter.get("engine"));
+      this.parameter = parameter;
+      this.engine = engine;
   }
 
  /***

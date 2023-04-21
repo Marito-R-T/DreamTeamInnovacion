@@ -1,4 +1,4 @@
-package org.example.serpapi;
+package org.example.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
