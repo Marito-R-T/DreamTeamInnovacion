@@ -30,7 +30,7 @@ public class GoogleScholarController {
             JsonObject results = search.getJson();
             JsonElement profiles = results.get("profiles");
             System.out.println(profiles);
-            List<Author> authors = this.authorController.manageAuthors(profiles);
+            List<Author> authors = this.authorController.manageAuthors(profiles, label);
 
             return this.toJson(authors);
         }
@@ -56,4 +56,7 @@ public class GoogleScholarController {
         return gson.toJson(je);
     }
 
+    public AuthorController getAuthorController() {
+        return authorController;
+    }
 }

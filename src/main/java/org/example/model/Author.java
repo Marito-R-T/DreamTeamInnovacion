@@ -5,6 +5,7 @@ import java.util.List;
 public class Author {
 
     private String name;
+    private String label;
     private Integer citations;
     private List<Article> articles;
     private String id;
@@ -13,10 +14,11 @@ public class Author {
         this.id = id;
     }
 
-    public Author(String name, Integer citations, String id) {
+    public Author(String name, Integer citations, String id, String label) {
         this.name = name;
         this.citations = citations;
         this.id = id;
+        this.label = label;
     }
 
     public Author(String name, Integer citations, List<Article> articles, String id) {
@@ -52,5 +54,13 @@ public class Author {
 
     public String getId() {
         return id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }
