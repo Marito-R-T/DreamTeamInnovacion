@@ -2,19 +2,21 @@ package org.example.controller.mysql;
 
 import org.example.controller.GoogleScholarController;
 import org.example.db.MysqlInstance;
+import org.example.model.Article;
 import org.example.model.Author;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.JDBCType;
+import java.time.LocalDate;
 
-public class DatabaseSaveAuthorController {
+public class DatabaseSaveArticleController {
 
-    public DatabaseSaveAuthorController() {
+    public DatabaseSaveArticleController() {
 
     }
-
-    public void addAuthors(GoogleScholarController scholarController) {
+    public void addArticles(GoogleScholarController scholarController) {
         Connection connection = null;
         try {
             // Cargar la conexión
@@ -23,8 +25,8 @@ public class DatabaseSaveAuthorController {
             // Deshabilitar el autocommit
             connection.setAutoCommit(false);
             System.out.println(connection.getAutoCommit());
-            for (Author author : scholarController.getAuthorController().getAuthors()) {
-                this.addAuthor(author, connection);
+            for (Article author : scholarController.getArticleController().getArticles()) {
+                this.addArticle(author, connection);
             }
 
             // Confirmar los cambios
@@ -53,19 +55,20 @@ public class DatabaseSaveAuthorController {
         }
     }
 
-    private void addAuthor(Author author, Connection connection) throws SQLException {
+    private void addArticle(Article article, Connection connection) throws SQLException {
         // Preparar la consulta
-        PreparedStatement statement = connection.prepareStatement(this.queryAddAuthor());
-        statement.setString(1, author.getId());
-        statement.setString(2, author.getName());
-        statement.setInt(3, author.getCitations());
-        statement.setString(4, author.getLabel());
+        PreparedStatement statement = connection.prepareStatement(this.queryAddArticle());
+        statement.setString(1, article.getId());
+        statement.setString(2, article.getTitle());
+        statement.setString(3, article.getAuthor().getId());
+        statement.setString(4, article.getPublication());
+        statement.setInt(5, article.getYear().getValue());
         // Ejecutar la consulta
         statement.executeUpdate();
     }
 
-    private String queryAddAuthor() {
-        return "INSERT INTO authors (id, name, citations, label) VALUES (?, ?, ?, ?)";
+    private String queryAddArticle() {
+        return "INSERT INTO articles (id, title, author, publication, year) VALUES (?, ?, ?, ?, ?)";
     }
 
 }

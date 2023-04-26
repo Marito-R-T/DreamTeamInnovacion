@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorController {
-
-    private ArticleController articleController;
     private List<Author> authors = new ArrayList<>();
 
     public AuthorController() {
-        this.articleController = new ArticleController();
     }
 
     public List<Author> manageAuthors(JsonElement array, String label) {
