@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.scholar;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

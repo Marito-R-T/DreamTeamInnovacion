@@ -8,13 +8,14 @@ public class MysqlInstance {
     private String url;
     private String user;
     private String password;
-    private Connection connection;
+    private Connection connection, getsConnection;
 
     private MysqlInstance() throws SQLException {
         this.url = "jdbc:mysql://localhost:3306/universidad_investigacion";
         this.user = "root";
         this.password = "password";
         this.connection = DriverManager.getConnection(this.url, this.user, this.password);
+        this.getsConnection = DriverManager.getConnection(this.url, this.user, this.password);
     }
 
     public static MysqlInstance getInstance() throws SQLException {
@@ -27,6 +28,12 @@ public class MysqlInstance {
     public Connection getConnection() throws SQLException {
         if (connection.isClosed()) connection = DriverManager.getConnection(this.url, this.user, this.password);
         return connection;
+    }
+
+    public Connection getGetsConnection() throws SQLException {
+        if (getsConnection.isClosed()) getsConnection = DriverManager.getConnection(this.url, this.user, this.password);
+        getsConnection.setReadOnly(true);
+        return getsConnection;
     }
 
 }

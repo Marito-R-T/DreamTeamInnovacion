@@ -1,11 +1,13 @@
 package org.example.controller.mysql;
 
-import org.example.controller.GoogleScholarController;
+import org.example.controller.scholar.GoogleScholarController;
 import org.example.db.MysqlInstance;
+import org.example.model.Article;
 import org.example.model.Author;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseSaveAuthorController {
@@ -19,14 +21,15 @@ public class DatabaseSaveAuthorController {
         try {
             // Cargar la conexión
             connection = MysqlInstance.getInstance().getConnection();
-            System.out.println(connection.getAutoCommit());
             // Deshabilitar el autocommit
             connection.setAutoCommit(false);
-            System.out.println(connection.getAutoCommit());
             for (Author author : scholarController.getAuthorController().getAuthors()) {
-                this.addAuthor(author, connection);
+                if (!this.existAuthor(author, MysqlInstance.getInstance().getGetsConnection())) {
+                    this.addAuthor(author, connection);
+                } else {
+                    this.updateAuthor(author, connection);
+                }
             }
-
             // Confirmar los cambios
             connection.commit();
             System.out.println(connection.getClientInfo());
@@ -64,8 +67,31 @@ public class DatabaseSaveAuthorController {
         statement.executeUpdate();
     }
 
+    private void updateAuthor(Author author, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(this.queryUpdateAuthor());
+        statement.setString(1, author.getName());
+        statement.setInt(2, author.getCitations());
+        statement.setString(3, author.getLabel());
+        statement.setString(4, author.getId());
+        statement.executeUpdate();
+    }
+
+    private boolean existAuthor(Author author, Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(this.queryGetAuthorByID());
+        statement.setString(1, author.getId());
+        return statement.executeQuery().next();
+    }
+
+    private String queryUpdateAuthor() {
+        return "UPDATE authors SET name=?, citations=?, label=? WHERE id=?";
+    }
+
     private String queryAddAuthor() {
         return "INSERT INTO authors (id, name, citations, label) VALUES (?, ?, ?, ?)";
+    }
+
+    private String queryGetAuthorByID() {
+        return "SELECT * FROM authors WHERE id = ?";
     }
 
 }

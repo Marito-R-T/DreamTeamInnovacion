@@ -1,17 +1,8 @@
 package org.example;
 
-import com.google.gson.JsonObject;
-import org.example.controller.GoogleSearch;
-import org.example.controller.SerpApiSearchException;
-import org.example.controller.mysql.DatabaseSaveAuthorController;
 import org.example.view.Principalview;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {

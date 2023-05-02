@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.scholar;
 
 import com.google.gson.*;
 import org.example.adapter.YearAdapter;

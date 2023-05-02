@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.scholar;
 
 import javax.net.ssl.*;
 import java.io.*;

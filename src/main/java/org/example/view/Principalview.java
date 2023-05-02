@@ -1,14 +1,11 @@
 package org.example.view;
 
-import org.example.controller.GoogleScholarController;
+import org.example.controller.scholar.GoogleScholarController;
 import org.example.controller.mysql.DatabaseSaveArticleController;
 import org.example.controller.mysql.DatabaseSaveAuthorController;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Principalview extends JFrame {
 

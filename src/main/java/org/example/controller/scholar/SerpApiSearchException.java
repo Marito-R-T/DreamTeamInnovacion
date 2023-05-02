@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.scholar;
 
 /**
  * SerpApi Search Exception wraps any exception related to the connection with SerpApi.com

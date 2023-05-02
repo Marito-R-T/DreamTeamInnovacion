@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.scholar;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
